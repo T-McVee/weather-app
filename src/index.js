@@ -1,8 +1,19 @@
 import './css/main.css';
 import { Tooltip, Toast, Popover } from 'bootstrap';
 
+// DOM Cache
 const content = document.querySelector('#content');
 
+// Weather button Popover
+const weatherButton = document.querySelector('[data-bs-toggle="popover"]');
+const weatherButtonPopover = (() =>
+  new Popover(weatherButton, {
+    title: 'Popover Title',
+    content: 'Body content here.',
+    trigger: 'focus',
+  }))();
+
+// API config
 const apiKey = '43fe54a283fe2df1c8a82c947b7b6ac9';
 const tempUnits = 'metric';
 
