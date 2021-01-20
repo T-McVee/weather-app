@@ -24,14 +24,14 @@
 
     <div class="container-fluid d-flex flex-column">
       <div class="row">
-        <div class="col output-temp-main text-center mt-5 display-1">-4</div>
+        <div class="col current-temp-output text-center mt-5 display-1"><span id="current-temp-output">-4</span><span></span>&#8451</div>
       </div>
       <div class="row justify-content-center">
-        <div class="col-2 text-center">L: -6</div>
-        <div class="col-2 text-center">H: 0</div>
+        <div class="col-2 text-center">L: <span id="min-temp-output">-6</span></div>
+        <div class="col-2 text-center">H: <span id="max-temp-output">0</span></div>
       </div>
       <div class="row">
-        <div class="col output-city text-center mt-3 h1">
+        <div class="col location-output text-center mt-3 h1" id="location-output">
           Kelowna
         </div>
       </div>
@@ -44,8 +44,8 @@
           </div>
           <div class="row">
             <div class="col d-flex flex-row">
-              <input type="search" class="form-control" name="search" id="search" placeholder="Brisbane">
-              <button type="button" class="btn btn-dark ms-2">Submit</button>
+              <input type="search" class="form-control" name="search" id="search-bar" placeholder="Enter a location...">
+              <button type="button" class="btn btn-dark ms-2" id="search-button">Submit</button>
             </div>
           </div>
         </form>
