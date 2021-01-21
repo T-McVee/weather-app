@@ -1,12 +1,16 @@
-import './css/main.css';
+import './css/main.scss';
 import { Tooltip, Toast, Popover } from 'bootstrap';
+import { getTime, getIcon, updateImg } from './logic';
+import { doc } from 'prettier';
 
 // DOM Cache
 const content = document.querySelector('#content');
-const locationOutput = document.querySelector('#location-output');
+const weatherIcon = document.querySelector('#weather-icon');
 const currentTempOuput = document.querySelector('#current-temp-output');
 const minTempOutput = document.querySelector('#min-temp-output');
 const maxTempOutput = document.querySelector('#max-temp-output');
+const locationOutput = document.querySelector('#location-output');
+const timeOutput = document.querySelector('#time-output');
 const searchForm = document.querySelector('form');
 const searchBar = document.querySelector('#search-bar');
 const searchButton = document.querySelector('#search-button');
@@ -44,8 +48,13 @@ const processData = async (func) => {
     minTempOutput.textContent = Math.round(weather.main.temp_min);
     maxTempOutput.textContent = Math.round(weather.main.temp_max);
     locationOutput.textContent = weather.name;
+
+    weatherIcon.src = getIcon(weather);
+    timeOutput.textContent = getTime(weather);
+    setInterval(() => timeOutput.textContent = getTime(weather), 60000);
   } catch (err) {
     if (err) locationOutput.textContent = `${searchBar.value} is not a valid location`;
+    console.error(err);
   }
   searchForm.reset();
 };
@@ -54,3 +63,4 @@ searchForm.addEventListener('submit', (e) => {
   e.preventDefault();
   processData(getWeather(searchBar.value, apiKey));
 });
+

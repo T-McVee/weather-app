@@ -22,30 +22,34 @@
       </div>
     </nav>
 
-    <div class="container-fluid d-flex flex-column">
+    <section class="container-fluid d-flex flex-column location-details pt-4 pb-4">
       <div class="row">
-        <div class="col current-temp-output text-center mt-5 display-1"><span id="current-temp-output"></span><span></span>&#8451</div>
+        <div class="col text-center mt-5"><img id="weather-icon" src="" alt="" class="mx-auto"></div>
+      </div>
+      <div class="row">
+        <div class="col current-temp-output text-center display-1"><span id="current-temp-output"></span><span></span>&#8451</div>
       </div>
       <div class="row justify-content-center">
-        <div class="col-2 text-center">L: <span id="min-temp-output"></span></div>
-        <div class="col-2 text-center">H: <span id="max-temp-output"></span></div>
+        <div class="col-3 text-end">L: <span id="min-temp-output"></span></div>
+        <div class="col-3 text-start">H: <span id="max-temp-output"></span></div>
       </div>
       <div class="row">
-        <div class="col location-output text-center mt-3 h1" id="location-output">
-          
-        </div>
+        <div class="col location-output text-center mt-3 display-4" id="location-output"></div>
       </div>
-    </div>
+      <div class="row">
+        <div class="col time-output text-center mt-3 display-6" id="time-output"></div>
+      </div>
+    </section>
     <section class="container-fluid d-flex flex-column justify-content-center align-items-center">
       <div class="row">
         <form class="d-flex flex-column">
           <div class="row">
-            <h2 class="text-center mt-5 mb-3">Check the weather in...</h2>
+            <h2 class="text-center mt-3 mb-3">Check the weather in...</h2>
           </div>
           <div class="row">
             <div class="col d-flex flex-row">
-              <input type="search" class="form-control" name="search" id="search-bar" placeholder="Enter a location...">
-              <button type="button" class="btn btn-dark ms-2" id="search-button">Submit</button>
+              <input type="search" class="form-control" name="search" id="search-bar" placeholder="Enter a location..." required>
+              <button type="submit" class="btn btn-dark ms-2" id="search-button">Submit</button>
             </div>
           </div>
         </form>
