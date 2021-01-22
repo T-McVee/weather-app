@@ -1,5 +1,17 @@
 import { format } from 'date-fns';
 
+const getWeather = async (city, units) => {
+  const key = '43fe54a283fe2df1c8a82c947b7b6ac9';
+  const res = await fetch(
+    `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${key}&units=${units}`,
+    { mode: 'cors' },
+  );
+
+  const weather = await res.json();
+
+  return weather;
+};
+
 const getTime = (weather) => {
   const d = new Date();
   const localTime = d.getTime();
@@ -13,15 +25,7 @@ const getTime = (weather) => {
 };
 
 const getIcon = ({ weather }) => {
-  const url = `http://openweathermap.org/img/wn/${weather[0].icon}@2x.png`;
-
-  return url;
+  return `http://openweathermap.org/img/wn/${weather[0].icon}@2x.png`;
 };
 
-const updateImg = (image, url) => {
-  console.log(image);
-  
-  image.src = url;
-};
-
-export { getTime, getIcon, updateImg };
+export { getWeather, getTime, getIcon };

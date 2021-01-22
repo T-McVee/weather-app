@@ -1,19 +1,18 @@
 import './css/main.scss';
 import { Tooltip, Toast, Popover } from 'bootstrap';
-import { getTime, getIcon, updateImg } from './logic';
-import { doc } from 'prettier';
+import { getWeather, getTime, getIcon } from './logic';
 
 // DOM Cache
 const content = document.querySelector('#content');
+const weatherDisplay = document.querySelector('.weather-display-section');
 const weatherIcon = document.querySelector('#weather-icon');
-const currentTempOuput = document.querySelector('#current-temp-output');
-const minTempOutput = document.querySelector('#min-temp-output');
-const maxTempOutput = document.querySelector('#max-temp-output');
-const locationOutput = document.querySelector('#location-output');
-const timeOutput = document.querySelector('#time-output');
+const currentTempDisplay = document.querySelector('#current-temp-display');
+const minTempDisplay = document.querySelector('#min-temp-display');
+const maxTempDisplay = document.querySelector('#max-temp-display');
+const locationDisplay = document.querySelector('#location-display');
+const timeDisplay = document.querySelector('#time-display');
 const searchForm = document.querySelector('form');
 const searchBar = document.querySelector('#search-bar');
-const searchButton = document.querySelector('#search-button');
 
 // Weather button Popover
 const weatherButton = document.querySelector('[data-bs-toggle="popover"]');
@@ -24,43 +23,33 @@ const weatherButtonPopover = (() =>
     trigger: 'focus',
   }))();
 
-// API config
-const apiKey = '43fe54a283fe2df1c8a82c947b7b6ac9';
-const tempUnits = 'metric';
+const updateDisplay = (data) => {
+  weatherIcon.src = getIcon(data);
+  currentTempDisplay.textContent = `${Math.round(data.main.temp)}\u2103`;
+  minTempDisplay.textContent = Math.round(data.main.temp_min);
+  maxTempDisplay.textContent = Math.round(data.main.temp_max);
+  locationDisplay.textContent = data.name;
 
-const getWeather = async (city, key) => {
-  const res = await fetch(
-    `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${key}&units=${tempUnits}`,
-    { mode: 'cors' },
-  );
+  timeDisplay.textContent = getTime(data);
+  setInterval(() => timeDisplay.textContent = getTime(data), 60000);
 
-  const weather = await res.json();
-
-  return weather;
+  weatherDisplay.style.animation = 'fadeNdrop 0.8s 1 forwards';
+  weatherIcon.style.animation = 'fadeNdrop 0.8s';
 };
 
 const processData = async (func) => {
   try {
     const weather = await func;
-    console.log(weather);
-
-    currentTempOuput.textContent = Math.round(weather.main.temp);
-    minTempOutput.textContent = Math.round(weather.main.temp_min);
-    maxTempOutput.textContent = Math.round(weather.main.temp_max);
-    locationOutput.textContent = weather.name;
-
-    weatherIcon.src = getIcon(weather);
-    timeOutput.textContent = getTime(weather);
-    setInterval(() => timeOutput.textContent = getTime(weather), 60000);
+    updateDisplay(weather);
   } catch (err) {
-    if (err) locationOutput.textContent = `${searchBar.value} is not a valid location`;
-    console.error(err);
+    if (err)
+      locationDisplay.textContent = `${searchBar.value} is not a valid location`;
+  } finally {
+    searchForm.reset();
   }
-  searchForm.reset();
 };
 
 searchForm.addEventListener('submit', (e) => {
   e.preventDefault();
-  processData(getWeather(searchBar.value, apiKey));
+  processData(getWeather(searchBar.value, 'metric'));
 });
-
