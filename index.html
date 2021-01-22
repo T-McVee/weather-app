@@ -22,25 +22,27 @@
       </div>
     </nav>
 
-    <section class="container-fluid d-flex flex-column location-details pt-4 pb-4">
-      <div class="row">
+    <section class="container-fluid d-flex flex-column weather-display-section pt-4 pb-4">
+      <div class="row row-icon">
         <div class="col text-center mt-5"><img id="weather-icon" src="" alt="" class="mx-auto"></div>
       </div>
-      <div class="row">
-        <div class="col current-temp-output text-center display-1"><span id="current-temp-output"></span><span></span>&#8451</div>
+      <div class="row row-current-temp">
+        <div class="col text-center display-1">
+          <span id="current-temp-display" class="current-temp-display"></span>
+        </div>
       </div>
-      <div class="row justify-content-center">
-        <div class="col-3 text-end">L: <span id="min-temp-output"></span></div>
-        <div class="col-3 text-start">H: <span id="max-temp-output"></span></div>
+      <div class="row justify-content-center row-min-max">
+        <div class="col-3 text-end">L: <span id="min-temp-display"></span></div>
+        <div class="col-3 text-start">H: <span id="max-temp-display"></span></div>
       </div>
       <div class="row">
-        <div class="col location-output text-center mt-3 display-4" id="location-output"></div>
+        <div class="col location-display text-center mt-3 display-4" id="location-display"></div>
       </div>
       <div class="row">
-        <div class="col time-output text-center mt-3 display-6" id="time-output"></div>
+        <div class="col time-display text-center mt-3 display-6" id="time-display"></div>
       </div>
     </section>
-    <section class="container-fluid d-flex flex-column justify-content-center align-items-center">
+    <section class="container-fluid d-flex flex-column justify-content-center align-items-center input-section">
       <div class="row">
         <form class="d-flex flex-column">
           <div class="row">
